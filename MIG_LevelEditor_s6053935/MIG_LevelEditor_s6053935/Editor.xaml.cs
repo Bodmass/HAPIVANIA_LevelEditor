@@ -10,30 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MIG_LevelEditor_s6053935
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Editor.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Editor : Window
     {
-        public MainWindow()
+        public Editor()
         {
             InitializeComponent();
-
-
-        }
-
-        private void New_Click(object sender, RoutedEventArgs e)
-        {
-            Editor win = new Editor();
-            win.Show();
-            this.Close();
         }
     }
-
-
 }

@@ -1,0 +1,55 @@
+﻿<Window x:Class="MIG_LevelEditor_s6053935.Editor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MIG_LevelEditor_s6053935"
+        mc:Ignorable="d"
+        Title="MIG_LevelEditor_s6053935 : 'Untitled'" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FF151515" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="520" VerticalAlignment="Top" Width="998" Margin="10.67,158.33,0,0" Background="White"/>
+        <Grid HorizontalAlignment="Left" Height="448" VerticalAlignment="Top" Width="248.5" Margin="1013.67,158.33,0,0" Background="White"/>
+        <Grid HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="248.5" Margin="1013.67,611.33,0,0" Background="White"/>
+        <Image Margin="0,0,648.492,516.998" Source="Logo.png" Stretch="Fill"/>
+        <Grid HorizontalAlignment="Left" Height="143.33" VerticalAlignment="Top" Width="633.662" Margin="628.508,10,0,0">
+            <Button x:Name="NewBTN" Content="New" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#FF1B1B1B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="LoadBTN" Content="Load" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="119.454,0,0,0">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#FF1B1B1B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="SaveBTN" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="238.908,0,0,0">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#FF1B1B1B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="SaveBTN_Copy" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="509.208,110.87,0,0">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#FF1B1B1B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

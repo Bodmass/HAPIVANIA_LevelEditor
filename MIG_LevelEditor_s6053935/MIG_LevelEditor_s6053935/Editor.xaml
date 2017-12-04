@@ -13,9 +13,25 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="520" VerticalAlignment="Top" Width="998" Margin="10.67,158.33,0,0" Background="White"/>
-        <Grid HorizontalAlignment="Left" Height="448" VerticalAlignment="Top" Width="248.5" Margin="1013.67,158.33,0,0" Background="White"/>
-        <Grid HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="248.5" Margin="1013.67,611.33,0,0" Background="White"/>
+        <Grid Width="998" Margin="268.25,204,5.75,5.335">
+            <Canvas x:Name="canvasman"/>
+        </Grid>
+        <Grid x:Name="Grid_Tiles" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Margin="9,204,0,0">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF3C3C3C" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <ListView x:Name="lstvIndivTiles2" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="248.5" Margin="9,612,0,0" Background="White"/>
         <Image Margin="0,0,648.492,516.998" Source="Logo.png" Stretch="Fill"/>
         <Grid HorizontalAlignment="Left" Height="143.33" VerticalAlignment="Top" Width="633.662" Margin="628.508,10,0,0">
             <Button x:Name="NewBTN" Content="New" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS">
@@ -42,14 +58,46 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="SaveBTN_Copy" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="509.208,110.87,0,0">
+            <Button x:Name="SaveBTN_Copy" HorizontalAlignment="Left" VerticalAlignment="Top" Width="153.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="470.208,110.87,0,0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
                         <GradientStop Color="#FF1B1B1B" Offset="1"/>
                     </LinearGradientBrush>
                 </Button.Background>
+                <Popup>
+                    <Grid Background="#FFE5E5E5" Height="100" Width="100"/>
+                </Popup>
             </Button>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="40.67" VerticalAlignment="Top" Width="248.5" Margin="9,158.33,0,0">
+            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248.5" Height="40.67" Background="#FF252525" Foreground="#FF191919" BorderBrush="{x:Null}" FontSize="22" SelectedIndex="0" FontWeight="Bold">
+                <ComboBoxItem Content="Tiles" Selected="Tiles_Click" HorizontalAlignment="Left" Width="238.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold"/>
+                <ComboBoxItem Content="Objects" HorizontalAlignment="Left" Width="118" IsEnabled="False" FontWeight="Bold"/>
+                <ComboBoxItem Content="Enemies" HorizontalAlignment="Left" Width="246.5" IsEnabled="False" FontWeight="Bold"/>
+                <ComboBoxItem Content="Settings" Selected="Settings_Click" HorizontalAlignment="Left" Width="246.5" FontWeight="Bold"/>
+            </ComboBox>
+        </Grid>
+        <Grid x:Name="Grid_Settings" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Margin="9,204,0,0" Visibility="Collapsed">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF3C3C3C" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Menu HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Background="{x:Null}">
+                <MenuItem Header="MenuItem" Height="54" Width="248.5" Background="#FF303030" Foreground="White" BorderBrush="{x:Null}"/>
+            </Menu>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="22.17" VerticalAlignment="Top" Width="319.258" Margin="268.25,176.83,0,0" Background="#FF232323">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="BG LAYER" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75.667" Height="20.67" Margin="0,1,0,0"/>
+            <Button Content="GAME LAYER" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75.667" Height="20.67" Margin="80.667,1,0,0" Grid.ColumnSpan="2"/>
+            <Button Content="FOREGROUND" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75.667" Height="20.67" Margin="63.083,1,0,0" Grid.Column="1" FontSize="11"/>
+            <Button Content="COLLISION" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75.667" Height="20.67" FontSize="14" Margin="143.75,1,0,0" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>

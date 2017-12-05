@@ -20,7 +20,7 @@ namespace MIG_LevelEditor_s6053935
     public partial class Editor : Window
     {
         int width = 30;
-        int height = 10;
+        int height = 15;
         public Editor()
         {
 

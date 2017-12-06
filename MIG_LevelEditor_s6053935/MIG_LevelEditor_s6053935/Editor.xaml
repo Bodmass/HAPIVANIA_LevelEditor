@@ -25,13 +25,7 @@
                     <GradientStop Color="#FF3C3C3C" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <ListView x:Name="lstvIndivTiles2" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <Canvas x:Name="TileCanvas" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="238.5"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="248.5" Margin="9,612,0,0" Background="White"/>
         <Image Margin="0,0,648.492,516.998" Source="Logo.png" Stretch="Fill"/>
@@ -64,7 +58,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="ImportBTN" Content="Import Tileset" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS">
+            <Button x:Name="ImportBTN" Content="Import Tileset" Click="btnImportTileset_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>

@@ -50,6 +50,22 @@ namespace MIG_LevelEditor_s6053935
             //Grid_Settings.Visibility = System.Windows.Visibility.Visible;
         }
 
+
+        private void btnImportTileset_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+
+        }
+
         private void DisplayGrid()
         {
             int size = 32;

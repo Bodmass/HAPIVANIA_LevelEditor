@@ -13,15 +13,10 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Grid Width="998" Margin="268.25,204,5.75,5.335">
-            <ListView Height="461.665" Width="988" Margin="0,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" IsHitTestVisible="True" Background="{x:Null}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-                <Canvas x:Name="canvasman" Height="481.665" Width="998"/>
-            </ListView>
+        <Grid Margin="269.25,204,68.628,38.835">
+            <ScrollViewer x:Name="MapScroll" Height="438.165" VerticalAlignment="Top" Width="926.122" HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Left" CanContentScroll="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Background="Black">
+                <Canvas x:Name="canvasman" Height="618.165" Width="1175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </ScrollViewer>
         </Grid>
         <Grid x:Name="Grid_Tiles" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Margin="9,204,0,0">
             <Grid.Background>

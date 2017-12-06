@@ -19,15 +19,15 @@ namespace MIG_LevelEditor_s6053935
     /// </summary>
     public partial class Editor : Window
     {
-        int width = 30;
-        int height = 15;
+        int width;
+        int height;
         public Editor()
         {
 
-
+            int.TryParse((string)((MainWindow)Application.Current.MainWindow).SetWidth.Text, out width);
+            int.TryParse((string)((MainWindow)Application.Current.MainWindow).SetHeight.Text, out height);
             InitializeComponent();
             DisplayGrid();
-
 
         }
 
@@ -64,9 +64,16 @@ namespace MIG_LevelEditor_s6053935
                     rect.Width = size; rect.Height = size;
                     rect.Fill = Brushes.Magenta;
 
+                    TextBlock text = new TextBlock();
+                    text.Width = size; text.Height = size;
+                    text.Text = (row*width+col).ToString();
+
                     Canvas.SetTop(rect, top);
                     Canvas.SetLeft(rect, left);
+                    Canvas.SetTop(text, top);
+                    Canvas.SetLeft(text, left);
                     canvasman.Children.Add(rect);
+                    canvasman.Children.Add(text);
 
                     left += (size + 1);
                 }
@@ -74,6 +81,9 @@ namespace MIG_LevelEditor_s6053935
                 left = 0;
                 top += (size + 1);
             }
+
+            canvasman.Width = (width * 32) + width;
+            canvasman.Height = (height * 32) + height;
         }
     }
 

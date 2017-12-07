@@ -21,6 +21,8 @@ namespace MIG_LevelEditor_s6053935
     {
         int width;
         int height;
+        int tiles = 0;
+        List <Tile>tileList = new List<Tile>();
         public Editor()
         {
 
@@ -56,11 +58,48 @@ namespace MIG_LevelEditor_s6053935
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
             dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+            dlg.Title = "Load Tileset";
+            dlg.Filter = "All Files (Images)|*.png;*.jpg;*.jpeg|JPEG Files (*.jpeg, *jpg)|*.jpeg;*.jpg|PNG Files (*.png)|*.png";
 
 
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                TilesetName.Text = "Tileset: " + filename;
+
+                Image tilesetImage = new Image();
+                ImageBrush tilesetImage2 = new ImageBrush();
+                //tilesetImage2.ImageSource = new BitmapImage(new Uri(filename));
+                tilesetImage.Source = new BitmapImage(new Uri(filename));
+                //TileCanvas.Background = tilesetImage2;
+
+                for (int x = 0; x < 10; x++)
+                {
+                    for (int y = 0; y < 10; y++)
+                    {
+                        if (tilesetImage != null)
+                        {
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(filename));
+                            TileCanvas.Children.Add(img);
+                        }
+                        else
+                        {
+                            Rectangle rect = new Rectangle();
+                            rect.Fill = Brushes.Magenta;
+                            TileCanvas.Children.Add(rect);
+                        }
+                    }
+                }
+                /*
+                Canvas.SetLeft(grid, (canvas.Width - grid.Width) / 2);
+                Canvas.SetTop(grid, (canvas.Height - grid.Height) / 2);
+                canvas.Children.Add(grid);
+                */
+            }
 
 
 
@@ -76,31 +115,36 @@ namespace MIG_LevelEditor_s6053935
             {
                 for (int col = 0; col < width; col++)
                 {
-                    Rectangle rect = new Rectangle();
-                    rect.Width = size; rect.Height = size;
-                    rect.Fill = Brushes.Magenta;
 
-                    TextBlock text = new TextBlock();
-                    text.Width = size; text.Height = size;
-                    text.Text = (row*width+col).ToString();
-
-                    Canvas.SetTop(rect, top);
-                    Canvas.SetLeft(rect, left);
-                    Canvas.SetTop(text, top);
-                    Canvas.SetLeft(text, left);
-                    canvasman.Children.Add(rect);
-                    canvasman.Children.Add(text);
-
+                    tileList.Add(new Tile(canvasman, (row * width + col).ToString(), top, left));
+                    
                     left += (size + 1);
                 }
 
                 left = 0;
                 top += (size + 1);
+                tiles++;
             }
+
+            
 
             canvasman.Width = (width * 32) + width;
             canvasman.Height = (height * 32) + height;
         }
+
+        private void UpdateGrid(object sender, MouseEventArgs e)
+        {
+            tileList[0].MouseOver();
+
+            for (int i = 0; i > tileList.Count(); i++)
+            {
+                
+
+            }
+
+
+        }
+
     }
 
 

@@ -15,7 +15,8 @@
     <Grid>
         <Grid Margin="269.25,204,68.628,38.835">
             <ScrollViewer x:Name="MapScroll" Height="438.165" VerticalAlignment="Top" Width="926.122" HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Left" CanContentScroll="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Background="Black">
-                <Canvas x:Name="canvasman" Height="618.165" Width="1175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Canvas x:Name="canvasman" MouseMove="UpdateGrid" Height="618.165" Width="1175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
             </ScrollViewer>
         </Grid>
         <Grid x:Name="Grid_Tiles" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Margin="9,204,0,0">
@@ -74,8 +75,9 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+            <TextBlock x:Name="TilesetName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,35.46,0,0" Grid.ColumnSpan="2" Height="23.293" Width="453.7" Foreground="White"><Run Text="Tileset: "/><Run Text="[Nothing Loaded]"/><LineBreak/><Run/></TextBlock>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="40.67" VerticalAlignment="Top" Width="248.5" Margin="9,158.33,0,0">
+        <Grid HorizontalAlignment="Left" Height="40.67" VerticalAlignment="Top" Width="248.5" Margin="9,157.663,0,0">
             <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248.5" Height="40.67" Background="#FF252525" Foreground="#FF191919" BorderBrush="{x:Null}" FontSize="22" SelectedIndex="0" FontWeight="Bold">
                 <ComboBoxItem Content="Tiles" Selected="Tiles_Click" HorizontalAlignment="Left" Width="238.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold"/>
                 <ComboBoxItem Content="Objects" HorizontalAlignment="Left" Width="118" IsEnabled="False" FontWeight="Bold"/>

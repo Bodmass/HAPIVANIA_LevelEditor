@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace MIG_LevelEditor_s6053935
 {
     /// <summary>
@@ -23,6 +24,7 @@ namespace MIG_LevelEditor_s6053935
         int height;
         int tiles = 0;
         List <Tile>tileList = new List<Tile>();
+        List<Rect> tileRects = new List<Rect>();
         public Editor()
         {
 
@@ -31,6 +33,115 @@ namespace MIG_LevelEditor_s6053935
             InitializeComponent();
             DisplayGrid();
 
+        }
+
+        bool mouseDown = false; // Set to 'true' when mouse is held down.
+        Point mouseDownPos; // The point where the mouse button was clicked down.
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Capture and track the mouse.
+            mouseDown = true;
+            mouseDownPos = e.GetPosition(theGrid);
+            theGrid.CaptureMouse();
+
+            // Initial placement of the drag selection box.         
+            Canvas.SetLeft(selectionBox, mouseDownPos.X);
+            Canvas.SetTop(selectionBox, mouseDownPos.Y);
+            selectionBox.Width = 0;
+            selectionBox.Height = 0;
+
+            // Make the drag selection box visible.
+            selectionBox.Visibility = Visibility.Visible;
+
+            Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
+
+
+
+            foreach (Rect rects in tileRects)
+            {
+
+                if (rect1.IntersectsWith(rects))
+                {
+                    tileList[tileRects.IndexOf(rects)].SelectTile();
+                }
+                else
+                {
+                    tileList[tileRects.IndexOf(rects)].DeselectTile();
+                }
+            }
+
+
+
+        }
+
+        private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            // Release the mouse capture and stop tracking it.
+            mouseDown = false;
+            theGrid.ReleaseMouseCapture();
+
+            // Hide the drag selection box.
+            selectionBox.Visibility = Visibility.Collapsed;
+
+            Point mouseUpPos = e.GetPosition(theGrid);
+
+            // TODO: 
+            //
+            // The mouse has been released, check to see if any of the items 
+            // in the other canvas are contained within mouseDownPos and 
+            // mouseUpPos, for any that are, select them!
+            //
+        }
+
+        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+
+                Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
+
+
+
+                foreach (Rect rects in tileRects)
+                {
+
+                    if (rect1.IntersectsWith(rects))
+                    {
+                        tileList[tileRects.IndexOf(rects)].SelectTile();
+                    }
+                    else
+                    {
+                        tileList[tileRects.IndexOf(rects)].DeselectTile();
+                    }
+                }
+
+                // When the mouse is held down, reposition the drag selection box.
+
+                Point mousePos = e.GetPosition(theGrid);
+
+                if (mouseDownPos.X < mousePos.X)
+                {
+                    Canvas.SetLeft(selectionBox, mouseDownPos.X);
+                    selectionBox.Width = mousePos.X - mouseDownPos.X;
+                }
+                else
+                {
+                    Canvas.SetLeft(selectionBox, mousePos.X);
+                    selectionBox.Width = mouseDownPos.X - mousePos.X;
+                }
+
+                if (mouseDownPos.Y < mousePos.Y)
+                {
+                    Canvas.SetTop(selectionBox, mouseDownPos.Y);
+                    selectionBox.Height = mousePos.Y - mouseDownPos.Y;
+                }
+                else
+                {
+                    Canvas.SetTop(selectionBox, mousePos.Y);
+                    selectionBox.Height = mouseDownPos.Y - mousePos.Y;
+                }
+            }
         }
 
         private void HideDropdownGrid()
@@ -130,7 +241,14 @@ namespace MIG_LevelEditor_s6053935
 
             canvasman.Width = (width * 32) + width;
             canvasman.Height = (height * 32) + height;
+
+            foreach (Tile tile in tileList)
+            {
+                tileRects.Add(new Rect(Canvas.GetLeft(tile.getRect()), Canvas.GetTop(tile.getRect()), tile.getRect().Width, tile.getRect().Height));
+            }
         }
+
+
 
         private void UpdateGrid(object sender, MouseEventArgs e)
         {

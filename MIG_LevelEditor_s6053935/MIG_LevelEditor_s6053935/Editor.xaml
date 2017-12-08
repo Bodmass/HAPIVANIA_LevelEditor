@@ -15,9 +15,19 @@
     <Grid>
         <Grid Margin="269.25,204,68.628,38.835">
             <ScrollViewer x:Name="MapScroll" Height="438.165" VerticalAlignment="Top" Width="926.122" HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Left" CanContentScroll="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Background="Black">
-                <Canvas x:Name="canvasman" MouseMove="UpdateGrid" Height="618.165" Width="1175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Grid x:Name="theGrid"         MouseDown="Grid_MouseDown"
+        MouseUp="Grid_MouseUp"
+        MouseMove="Grid_MouseMove"
+        Background="Transparent">
+                    <Canvas x:Name="canvasman" MouseMove="UpdateGrid" Height="618.165" Width="1175" HorizontalAlignment="Left" VerticalAlignment="Top">
 
+                    </Canvas>
+                    <Canvas>
+                        <Rectangle x:Name="selectionBox" Visibility="Collapsed" Stroke="White" StrokeThickness="1" />
+                    </Canvas>
+                </Grid>
             </ScrollViewer>
+            
         </Grid>
         <Grid x:Name="Grid_Tiles" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Margin="9,204,0,0">
             <Grid.Background>

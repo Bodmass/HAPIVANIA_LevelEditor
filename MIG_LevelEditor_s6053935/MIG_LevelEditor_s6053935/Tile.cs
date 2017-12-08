@@ -15,13 +15,19 @@ namespace MIG_LevelEditor_s6053935
     class Tile
     {
         int tilesize = 32;
+        bool isSelected = false;
         Brush tilecolour = Brushes.Magenta;
         Rectangle TileRect;
-
+        Rectangle Selectangle;
+        //int remember_top = 0;
+        //int remember_left = 0;
 
 
         public Tile(Canvas canvas, String tileText, int top, int left)
         {
+           // int remember_top = top;
+           // int remember_left = left;
+
             TileRect = new Rectangle();
             TileRect.Width = tilesize; TileRect.Height = tilesize;
             TileRect.Fill = tilecolour;
@@ -36,6 +42,15 @@ namespace MIG_LevelEditor_s6053935
             canvas.Children.Add(TileRect);
             canvas.Children.Add(text);
 
+            Selectangle = new Rectangle();
+            Selectangle.Width = tilesize; Selectangle.Height = tilesize;
+            Canvas.SetTop(Selectangle, top);
+            Canvas.SetLeft(Selectangle, left);
+            Selectangle.StrokeThickness = 1;
+            Selectangle.Stroke = Brushes.White;
+            canvas.Children.Add(Selectangle);
+            Selectangle.Visibility = Visibility.Collapsed;
+   
         }
 
 
@@ -55,8 +70,22 @@ namespace MIG_LevelEditor_s6053935
 
         public void SelectTile()
         {
+            isSelected = true;
+            Selectangle.Visibility = Visibility.Visible;
+
         }
 
+        public void DeselectTile()
+        {
+            isSelected = false;
+            Selectangle.Visibility = Visibility.Collapsed;
+
+        }
+
+        public Rectangle getRect()
+        {
+            return TileRect;
+        }
     }
 
 }

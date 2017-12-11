@@ -27,7 +27,7 @@
                     </Canvas>
                 </Grid>
             </ScrollViewer>
-            
+
         </Grid>
         <Grid x:Name="Grid_Tiles" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Margin="9,204,0,0">
             <Grid.Background>
@@ -36,7 +36,17 @@
                     <GradientStop Color="#FF3C3C3C" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Canvas x:Name="TileCanvas" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="238.5"/>
+            <ScrollViewer x:Name="EditorScroll" Height="403" VerticalAlignment="Top" Width="248.5" HorizontalAlignment="Left" CanContentScroll="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Background="Black">
+                <Grid x:Name="TheOtherGrid"         
+                    MouseDown="Grid_MouseDown_Left"
+                    MouseUp="Grid_MouseUp_Left"
+                    Background="Transparent" Height="514">
+                    <Canvas x:Name="tilegetter" Height="618.165" Width="1175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Canvas>
+                        <Rectangle x:Name="selectionBox_Left" Visibility="Collapsed" Stroke="White" StrokeThickness="1" />
+                    </Canvas>
+                </Grid>
+            </ScrollViewer>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="248.5" Margin="9,612,0,0" Background="White"/>
         <Image Margin="0,0,648.492,516.998" Source="Logo.png" Stretch="Fill"/>

@@ -22,9 +22,13 @@ namespace MIG_LevelEditor_s6053935
     {
         int width;
         int height;
+        int tg_width;
+        int tg_height;
         int tiles = 0;
         List <Tile>tileList = new List<Tile>();
+        List<Tile> tileList2 = new List<Tile>();
         List<Rect> tileRects = new List<Rect>();
+        List<Rect> tileRects2 = new List<Rect>();
         public Editor()
         {
 
@@ -32,11 +36,15 @@ namespace MIG_LevelEditor_s6053935
             int.TryParse((string)((MainWindow)Application.Current.MainWindow).SetHeight.Text, out height);
             InitializeComponent();
             DisplayGrid();
+            DisplayGrid2();
 
         }
 
         bool mouseDown = false; // Set to 'true' when mouse is held down.
         Point mouseDownPos; // The point where the mouse button was clicked down.
+
+        bool mouseDown_Left = false; // Set to 'true' when mouse is held down.
+        Point mouseDownPos_Left; // The point where the mouse button was clicked down.
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -144,6 +152,56 @@ namespace MIG_LevelEditor_s6053935
             }
         }
 
+
+        private void Grid_MouseDown_Left(object sender, MouseButtonEventArgs a)
+        {
+            // Capture and track the mouse.
+            mouseDown_Left = true;
+            mouseDownPos_Left = a.GetPosition(TheOtherGrid);
+            TheOtherGrid.CaptureMouse();
+
+            // Initial placement of the drag selection box.         
+            Canvas.SetLeft(selectionBox_Left, mouseDownPos_Left.X);
+            Canvas.SetTop(selectionBox_Left, mouseDownPos_Left.Y);
+            selectionBox_Left.Width = 0;
+            selectionBox_Left.Height = 0;
+
+            // Make the drag selection box visible.
+            selectionBox_Left.Visibility = Visibility.Visible;
+
+            Rect rect2 = new Rect(Canvas.GetLeft(selectionBox_Left), Canvas.GetTop(selectionBox_Left), selectionBox_Left.Width, selectionBox_Left.Height);
+
+
+
+            foreach (Rect rects3 in tileRects2)
+            {
+
+                if (rect2.IntersectsWith(rects3))
+                {
+                    tileList2[tileRects2.IndexOf(rects3)].SelectTile();
+                }
+                else
+                {
+                    tileList2[tileRects2.IndexOf(rects3)].DeselectTile();
+                }
+            }
+
+        }
+
+
+        private void Grid_MouseUp_Left(object sender, MouseButtonEventArgs a)
+        {
+            // Release the mouse capture and stop tracking it.
+            mouseDown_Left = false;
+            TheOtherGrid.ReleaseMouseCapture();
+
+            // Hide the drag selection box.
+            selectionBox_Left.Visibility = Visibility.Collapsed;
+
+            Point mouseUpPos_Left = a.GetPosition(TheOtherGrid);
+        }
+
+
         private void HideDropdownGrid()
         {
             //Grid_Settings.Visibility = System.Windows.Visibility.Hidden;
@@ -195,13 +253,13 @@ namespace MIG_LevelEditor_s6053935
                         {
                             Image img = new Image();
                             img.Source = new BitmapImage(new Uri(filename));
-                            TileCanvas.Children.Add(img);
+                            //TileCanvas.Children.Add(img);
                         }
                         else
                         {
                             Rectangle rect = new Rectangle();
                             rect.Fill = Brushes.Magenta;
-                            TileCanvas.Children.Add(rect);
+                            //TileCanvas.Children.Add(rect);
                         }
                     }
                 }
@@ -218,6 +276,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void DisplayGrid()
         {
+
             int size = 32;
             int top = 0;
             int left = 0;
@@ -245,6 +304,40 @@ namespace MIG_LevelEditor_s6053935
             foreach (Tile tile in tileList)
             {
                 tileRects.Add(new Rect(Canvas.GetLeft(tile.getRect()), Canvas.GetTop(tile.getRect()), tile.getRect().Width, tile.getRect().Height));
+            }
+        }
+
+        private void DisplayGrid2()
+        {
+            tg_width = 7;
+            tg_height = 15;
+            int size = 32;
+            int top = 0;
+            int left = 0;
+
+            for (int row = 0; row < tg_height; row++)
+            {
+                for (int col = 0; col < tg_width; col++)
+                {
+
+                    tileList2.Add(new Tile(tilegetter, "", top, left));
+
+                    left += (size + 1);
+                }
+
+                left = 0;
+                top += (size + 1);
+                tiles++;
+            }
+
+
+
+            canvasman.Width = (width * 32) + width;
+            canvasman.Height = (height * 32) + height;
+
+            foreach (Tile tile2 in tileList2)
+            {
+                tileRects2.Add(new Rect(Canvas.GetLeft(tile2.getRect()), Canvas.GetTop(tile2.getRect()), tile2.getRect().Width, tile2.getRect().Height));
             }
         }
 

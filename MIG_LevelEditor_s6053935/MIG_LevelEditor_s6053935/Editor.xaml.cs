@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +31,8 @@ namespace MIG_LevelEditor_s6053935
         List<Rect> tileRects = new List<Rect>();
         List<Rect> tileRects2 = new List<Rect>();
         ImageBrush SelectedTile;
+        string currentAssemblyParentPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
         public Editor()
         {
 
@@ -50,7 +53,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void Setup()
         {
-            //SelectedTile.
+            SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_01.png", currentAssemblyParentPath))));
         }
 
         private void Deselect_All()

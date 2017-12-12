@@ -18,6 +18,7 @@ namespace MIG_LevelEditor_s6053935
         bool isSelected = false;
         Brush tilecolour = Brushes.Magenta;
         Rectangle TileRect;
+        ImageBrush tileImage;
         Rectangle Selectangle;
         //int remember_top = 0;
         //int remember_left = 0;
@@ -31,16 +32,17 @@ namespace MIG_LevelEditor_s6053935
             TileRect = new Rectangle();
             TileRect.Width = tilesize; TileRect.Height = tilesize;
             TileRect.Fill = tilecolour;
-            TextBlock text = new TextBlock();
-            text.Width = tilesize; text.Height = tilesize;
-            text.Text = tileText;
+           // TextBlock text = new TextBlock();
+           // text.Width = tilesize; text.Height = tilesize;
+            //text.Foreground = Brushes.GhostWhite;
+            //text.Text = tileText;
 
             Canvas.SetTop(TileRect, top);
             Canvas.SetLeft(TileRect, left);
-            Canvas.SetTop(text, top);
-            Canvas.SetLeft(text, left);
+            //Canvas.SetTop(text, top);
+           // Canvas.SetLeft(text, left);
             canvas.Children.Add(TileRect);
-            canvas.Children.Add(text);
+            //canvas.Children.Add(text);
 
             Selectangle = new Rectangle();
             Selectangle.Width = tilesize; Selectangle.Height = tilesize;
@@ -53,22 +55,16 @@ namespace MIG_LevelEditor_s6053935
    
         }
 
-
-        public void MouseOver()
+        public void SelectTile(ImageBrush img)
         {
-            TileRect.Fill = Brushes.Blue;
+            isSelected = true;
+            TileRect.Fill = img;
+            tileImage = img;
+            Selectangle.Visibility = Visibility.Visible;
 
-            if(TileRect.IsMouseOver)
-            {
-                
-            }
-            else
-            {
-                TileRect.Fill = Brushes.Magenta;
-            }
         }
 
-        public void SelectTile()
+        public void SelectTile2()
         {
             isSelected = true;
             Selectangle.Visibility = Visibility.Visible;
@@ -80,6 +76,11 @@ namespace MIG_LevelEditor_s6053935
             isSelected = false;
             Selectangle.Visibility = Visibility.Collapsed;
 
+        }
+
+        public ImageBrush CopyTile()
+        {
+            return tileImage;
         }
 
         public Rectangle getRect()

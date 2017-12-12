@@ -29,12 +29,14 @@ namespace MIG_LevelEditor_s6053935
         List<Tile> tileList2 = new List<Tile>();
         List<Rect> tileRects = new List<Rect>();
         List<Rect> tileRects2 = new List<Rect>();
+        ImageBrush SelectedTile;
         public Editor()
         {
 
             int.TryParse((string)((MainWindow)Application.Current.MainWindow).SetWidth.Text, out width);
             int.TryParse((string)((MainWindow)Application.Current.MainWindow).SetHeight.Text, out height);
             InitializeComponent();
+            Setup();
             DisplayGrid();
             DisplayGrid2();
 
@@ -45,6 +47,23 @@ namespace MIG_LevelEditor_s6053935
 
         bool mouseDown_Left = false; // Set to 'true' when mouse is held down.
         Point mouseDownPos_Left; // The point where the mouse button was clicked down.
+
+        private void Setup()
+        {
+            //SelectedTile.
+        }
+
+        private void Deselect_All()
+        {
+            mouseDown = false;
+            theGrid.ReleaseMouseCapture();
+            selectionBox.Visibility = Visibility.Collapsed;
+            foreach (Rect rects in tileRects)
+            {
+                tileList[tileRects.IndexOf(rects)].DeselectTile();
+
+            }
+        }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -71,7 +90,7 @@ namespace MIG_LevelEditor_s6053935
 
                 if (rect1.IntersectsWith(rects))
                 {
-                    tileList[tileRects.IndexOf(rects)].SelectTile();
+                    tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile);
                 }
                 else
                 {
@@ -80,6 +99,44 @@ namespace MIG_LevelEditor_s6053935
             }
 
 
+
+        }
+
+        private void Grid_CopyTile(object sender, MouseButtonEventArgs e)
+        {
+            // Capture and track the mouse.
+            mouseDown = true;
+            mouseDownPos = e.GetPosition(theGrid);
+            theGrid.CaptureMouse();
+
+            // Initial placement of the drag selection box.         
+            Canvas.SetLeft(selectionBox, mouseDownPos.X);
+            Canvas.SetTop(selectionBox, mouseDownPos.Y);
+            selectionBox.Width = 0;
+            selectionBox.Height = 0;
+
+            // Make the drag selection box visible.
+            //selectionBox.Visibility = Visibility.Visible;
+
+            Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
+
+
+
+            foreach (Rect rects in tileRects)
+            {
+
+                if (rect1.IntersectsWith(rects))
+                {
+                    tileList[tileRects.IndexOf(rects)].SelectTile2();
+                    SelectedTile = tileList[tileRects.IndexOf(rects)].CopyTile();
+                }
+                else
+                {
+                    tileList[tileRects.IndexOf(rects)].DeselectTile();
+                }
+            }
+
+            mouseDown = false;
 
         }
 
@@ -116,7 +173,7 @@ namespace MIG_LevelEditor_s6053935
 
                     if (rect1.IntersectsWith(rects))
                     {
-                        tileList[tileRects.IndexOf(rects)].SelectTile();
+                        tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile);
                     }
                     else
                     {
@@ -178,7 +235,7 @@ namespace MIG_LevelEditor_s6053935
 
                 if (rect2.IntersectsWith(rects3))
                 {
-                    tileList2[tileRects2.IndexOf(rects3)].SelectTile();
+                    tileList2[tileRects2.IndexOf(rects3)].SelectTile2();
                 }
                 else
                 {
@@ -224,6 +281,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void btnImportTileset_Click(object sender, RoutedEventArgs e)
         {
+            Deselect_All();
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
             dlg.DefaultExt = ".png";
@@ -242,32 +300,9 @@ namespace MIG_LevelEditor_s6053935
                 Image tilesetImage = new Image();
                 ImageBrush tilesetImage2 = new ImageBrush();
                 //tilesetImage2.ImageSource = new BitmapImage(new Uri(filename));
-                tilesetImage.Source = new BitmapImage(new Uri(filename));
-                //TileCanvas.Background = tilesetImage2;
+                SelectedTile = new ImageBrush(new BitmapImage(new Uri(@filename)));
 
-                for (int x = 0; x < 10; x++)
-                {
-                    for (int y = 0; y < 10; y++)
-                    {
-                        if (tilesetImage != null)
-                        {
-                            Image img = new Image();
-                            img.Source = new BitmapImage(new Uri(filename));
-                            //TileCanvas.Children.Add(img);
-                        }
-                        else
-                        {
-                            Rectangle rect = new Rectangle();
-                            rect.Fill = Brushes.Magenta;
-                            //TileCanvas.Children.Add(rect);
-                        }
-                    }
-                }
-                /*
-                Canvas.SetLeft(grid, (canvas.Width - grid.Width) / 2);
-                Canvas.SetTop(grid, (canvas.Height - grid.Height) / 2);
-                canvas.Children.Add(grid);
-                */
+                //TileCanvas.Background = tilesetImage2;
             }
 
 
@@ -345,14 +380,6 @@ namespace MIG_LevelEditor_s6053935
 
         private void UpdateGrid(object sender, MouseEventArgs e)
         {
-            tileList[0].MouseOver();
-
-            for (int i = 0; i > tileList.Count(); i++)
-            {
-                
-
-            }
-
 
         }
 

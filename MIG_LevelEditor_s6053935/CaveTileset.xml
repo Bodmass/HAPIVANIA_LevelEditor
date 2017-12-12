@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tileset>
+  <sprites>
+    <sprite doc="Cave/Cave_01.png"/>
+	<sprite doc="Cave/Cave_02.png"/>
+	<sprite doc="Cave/Cave_03.png"/>
+	<sprite doc="Cave/Cave_04.png"/>
+	<sprite doc="Cave/Cave_05.png"/>
+	<sprite doc="Cave/Cave_07.png"/>
+	<sprite doc="Cave/Cave_08.png"/>
+	<sprite doc="Cave/Cave_09.png"/>
+	<sprite doc="Cave/Cave_10.png"/>
+	<sprite doc="Cave/Cave_11.png"/>
+	<sprite doc="Cave/Cave_12.png"/>
+	<sprite doc="Cave/Cave_13.png"/>
+	<sprite doc="Cave/Cave_14.png"/>
+	<sprite doc="Cave/Cave_15.png"/>
+	<sprite doc="Cave/Cave_16.png"/>
+	<sprite doc="Cave/Cave_17.png"/>
+	<sprite doc="Cave/Cave_18.png"/>
+	<sprite doc="Cave/Cave_20.png"/>
+	<sprite doc="Cave/Cave_21.png"/>
+  </sprites>
+  <tiles column="7" row="15">
+  </tiles>
+</tileset>

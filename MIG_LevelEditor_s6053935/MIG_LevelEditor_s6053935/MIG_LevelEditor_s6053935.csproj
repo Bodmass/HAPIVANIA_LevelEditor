@@ -107,27 +107,5 @@
   <ItemGroup>
     <Resource Include="Icon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Cave\Cave_01.png" />
-    <Resource Include="Cave\Cave_02.png" />
-    <Resource Include="Cave\Cave_03.png" />
-    <Resource Include="Cave\Cave_04.png" />
-    <Resource Include="Cave\Cave_05.png" />
-    <Resource Include="Cave\Cave_07.png" />
-    <Resource Include="Cave\Cave_08.png" />
-    <Resource Include="Cave\Cave_09.png" />
-    <Resource Include="Cave\Cave_10.png" />
-    <Resource Include="Cave\Cave_11.png" />
-    <Resource Include="Cave\Cave_12.png" />
-    <Resource Include="Cave\Cave_13.png" />
-    <Resource Include="Cave\Cave_14.png" />
-    <Resource Include="Cave\Cave_15.png" />
-    <Resource Include="Cave\Cave_16.png" />
-    <Resource Include="Cave\Cave_17.png" />
-    <Resource Include="Cave\Cave_18.png" />
-    <Resource Include="Cave\Cave_20.png" />
-    <Resource Include="Cave\Cave_21.png" />
-    <Resource Include="Cave\Cave_Tileset.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

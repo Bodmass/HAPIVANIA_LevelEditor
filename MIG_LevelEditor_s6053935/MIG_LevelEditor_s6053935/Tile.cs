@@ -14,9 +14,10 @@ namespace MIG_LevelEditor_s6053935
 {
     class Tile
     {
+        int index = 0;
         int tilesize = 32;
         bool isSelected = false;
-        Brush tilecolour = Brushes.Magenta;
+        Brush tilecolour = Brushes.Black;
         Rectangle TileRect;
         ImageBrush tileImage;
         Rectangle Selectangle;
@@ -32,8 +33,9 @@ namespace MIG_LevelEditor_s6053935
             TileRect = new Rectangle();
             TileRect.Width = tilesize; TileRect.Height = tilesize;
             TileRect.Fill = tilecolour;
-           // TextBlock text = new TextBlock();
-           // text.Width = tilesize; text.Height = tilesize;
+            TileRect.Stroke = Brushes.DarkSlateGray;
+            // TextBlock text = new TextBlock();
+            // text.Width = tilesize; text.Height = tilesize;
             //text.Foreground = Brushes.GhostWhite;
             //text.Text = tileText;
 

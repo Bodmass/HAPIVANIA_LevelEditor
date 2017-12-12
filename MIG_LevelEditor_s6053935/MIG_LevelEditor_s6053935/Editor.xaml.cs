@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 
 
 namespace MIG_LevelEditor_s6053935
@@ -30,7 +32,9 @@ namespace MIG_LevelEditor_s6053935
         List<Tile> tileList2 = new List<Tile>();
         List<Rect> tileRects = new List<Rect>();
         List<Rect> tileRects2 = new List<Rect>();
+        List<ImageBrush> edtiorTiles = new List<ImageBrush>();
         ImageBrush SelectedTile;
+        
         string currentAssemblyParentPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
         public Editor()
@@ -58,6 +62,10 @@ namespace MIG_LevelEditor_s6053935
 
         private void Deselect_All()
         {
+            Canvas.SetLeft(selectionBox, 9999);
+            Canvas.SetTop(selectionBox, 9999);
+            selectionBox.Width = 0;
+            selectionBox.Height = 0;
             mouseDown = false;
             theGrid.ReleaseMouseCapture();
             selectionBox.Visibility = Visibility.Collapsed;
@@ -70,6 +78,8 @@ namespace MIG_LevelEditor_s6053935
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            Deselect_All();
+
             // Capture and track the mouse.
             mouseDown = true;
             mouseDownPos = e.GetPosition(theGrid);
@@ -232,6 +242,7 @@ namespace MIG_LevelEditor_s6053935
             Rect rect2 = new Rect(Canvas.GetLeft(selectionBox_Left), Canvas.GetTop(selectionBox_Left), selectionBox_Left.Width, selectionBox_Left.Height);
 
 
+            Deselect_All();
 
             foreach (Rect rects3 in tileRects2)
             {
@@ -239,12 +250,15 @@ namespace MIG_LevelEditor_s6053935
                 if (rect2.IntersectsWith(rects3))
                 {
                     tileList2[tileRects2.IndexOf(rects3)].SelectTile2();
+                    SelectedTile = tileList2[tileRects2.IndexOf(rects3)].CopyTile();
                 }
                 else
                 {
                     tileList2[tileRects2.IndexOf(rects3)].DeselectTile();
                 }
             }
+
+
 
         }
 
@@ -289,7 +303,8 @@ namespace MIG_LevelEditor_s6053935
 
             dlg.DefaultExt = ".png";
             dlg.Title = "Load Tileset";
-            dlg.Filter = "All Files (Images)|*.png;*.jpg;*.jpeg|JPEG Files (*.jpeg, *jpg)|*.jpeg;*.jpg|PNG Files (*.png)|*.png";
+            //dlg.Filter = "All Files (Images)|*.png;*.jpg;*.jpeg|JPEG Files (*.jpeg, *jpg)|*.jpeg;*.jpg|PNG Files (*.png)|*.png";
+            dlg.Filter = "Tileset (XML)|*.xml";
 
 
             // Display OpenFileDialog by calling ShowDialog method 
@@ -300,12 +315,23 @@ namespace MIG_LevelEditor_s6053935
                 string filename = dlg.FileName;
                 TilesetName.Text = "Tileset: " + filename;
 
-                Image tilesetImage = new Image();
-                ImageBrush tilesetImage2 = new ImageBrush();
-                //tilesetImage2.ImageSource = new BitmapImage(new Uri(filename));
-                SelectedTile = new ImageBrush(new BitmapImage(new Uri(@filename)));
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filename);
+                List<string> locations = new List<string>();
+                foreach (XmlAttribute xa in doc.SelectNodes("tileset//sprites//sprite/@doc"))
+                {
+                    string location = xa.Value.ToString();
+                    Trace.WriteLine(location);
+                    locations.Add(location);
+                }
 
-                //TileCanvas.Background = tilesetImage2;
+                for (int i = 0; i < locations.Count; i++)
+                {
+                    ImageBrush EditorListBrush;
+                    EditorListBrush = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + locations[i], currentAssemblyParentPath))));
+                    tileList2[i].SelectTile(EditorListBrush);
+                }
+                
             }
 
 

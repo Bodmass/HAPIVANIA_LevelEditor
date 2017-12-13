@@ -103,7 +103,7 @@ namespace MIG_LevelEditor_s6053935
 
                 if (rect1.IntersectsWith(rects))
                 {
-                    tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile);
+                    tileList[tileRects.IndexOf(rects)].SelectTile2();
                 }
                 else
                 {
@@ -155,6 +155,20 @@ namespace MIG_LevelEditor_s6053935
 
         private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
         {
+
+            Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
+
+
+
+            foreach (Rect rects in tileRects)
+            {
+
+                if (rect1.IntersectsWith(rects))
+                {
+                    tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile);
+                }
+            }
+
             // Release the mouse capture and stop tracking it.
             mouseDown = false;
             theGrid.ReleaseMouseCapture();
@@ -186,7 +200,7 @@ namespace MIG_LevelEditor_s6053935
 
                     if (rect1.IntersectsWith(rects))
                     {
-                        tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile);
+                        tileList[tileRects.IndexOf(rects)].SelectTile2();
                     }
                     else
                     {

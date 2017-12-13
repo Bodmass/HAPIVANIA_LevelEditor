@@ -33,6 +33,7 @@ namespace MIG_LevelEditor_s6053935
         List<Rect> tileRects = new List<Rect>();
         List<Rect> tileRects2 = new List<Rect>();
         List<ImageBrush> edtiorTiles = new List<ImageBrush>();
+        List<string> locations = new List<string>();
         ImageBrush SelectedTile;
         
         string currentAssemblyParentPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
@@ -69,11 +70,13 @@ namespace MIG_LevelEditor_s6053935
             mouseDown = false;
             theGrid.ReleaseMouseCapture();
             selectionBox.Visibility = Visibility.Collapsed;
+            
             foreach (Rect rects in tileRects)
             {
                 tileList[tileRects.IndexOf(rects)].DeselectTile();
 
             }
+            
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -94,9 +97,11 @@ namespace MIG_LevelEditor_s6053935
             // Make the drag selection box visible.
             selectionBox.Visibility = Visibility.Visible;
 
+            /*
+
             Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
 
-
+            
 
             foreach (Rect rects in tileRects)
             {
@@ -111,7 +116,7 @@ namespace MIG_LevelEditor_s6053935
                 }
             }
 
-
+            */
 
         }
 
@@ -190,10 +195,11 @@ namespace MIG_LevelEditor_s6053935
         {
             if (mouseDown)
             {
+                /*
 
                 Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
 
-
+                
 
                 foreach (Rect rects in tileRects)
                 {
@@ -207,6 +213,8 @@ namespace MIG_LevelEditor_s6053935
                         tileList[tileRects.IndexOf(rects)].DeselectTile();
                     }
                 }
+
+                */
 
                 // When the mouse is held down, reposition the drag selection box.
 
@@ -244,24 +252,12 @@ namespace MIG_LevelEditor_s6053935
             mouseDownPos_Left = a.GetPosition(TheOtherGrid);
             TheOtherGrid.CaptureMouse();
 
-            // Initial placement of the drag selection box.         
-            Canvas.SetLeft(selectionBox_Left, mouseDownPos_Left.X);
-            Canvas.SetTop(selectionBox_Left, mouseDownPos_Left.Y);
-            selectionBox_Left.Width = 0;
-            selectionBox_Left.Height = 0;
-
-            // Make the drag selection box visible.
-            selectionBox_Left.Visibility = Visibility.Visible;
-
-            Rect rect2 = new Rect(Canvas.GetLeft(selectionBox_Left), Canvas.GetTop(selectionBox_Left), selectionBox_Left.Width, selectionBox_Left.Height);
-
-
             Deselect_All();
 
             foreach (Rect rects3 in tileRects2)
             {
 
-                if (rect2.IntersectsWith(rects3))
+                if (rects3.Contains(mouseDownPos_Left))
                 {
                     tileList2[tileRects2.IndexOf(rects3)].SelectTile2();
                     SelectedTile = tileList2[tileRects2.IndexOf(rects3)].CopyTile();
@@ -326,12 +322,13 @@ namespace MIG_LevelEditor_s6053935
 
             if (result == true)
             {
+                locations.Clear();
                 string filename = dlg.FileName;
                 TilesetName.Text = "Tileset: " + filename;
 
                 XmlDocument doc = new XmlDocument();
                 doc.Load(filename);
-                List<string> locations = new List<string>();
+
                 foreach (XmlAttribute xa in doc.SelectNodes("tileset//sprites//sprite/@doc"))
                 {
                     string location = xa.Value.ToString();
@@ -420,12 +417,39 @@ namespace MIG_LevelEditor_s6053935
         }
 
 
-
-        private void UpdateGrid(object sender, MouseEventArgs e)
+        private void SaveLevel(object sender, RoutedEventArgs e)
         {
+            XmlDocument doc = new XmlDocument();
+            XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            doc.AppendChild(docNode);
 
+            XmlNode spritesNode = doc.CreateElement("sprites");
+            doc.AppendChild(spritesNode);
+
+            for (int i = 0; i < locations.Count(); i++)
+            {
+                XmlNode spriteNode = doc.CreateElement("sprite");
+                XmlAttribute spriteAttribute = doc.CreateAttribute("location");
+                spriteAttribute.Value = locations[i];
+                spriteNode.Attributes.Append(spriteAttribute);
+                spritesNode.AppendChild(spriteNode);
+            }
+
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.Title = "Save Level";
+            dlg.FileName = "Untitled Level";
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "XML Files (.xml)|*.xml";
+            
+
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                string levelname = dlg.FileName;
+                doc.Save(levelname);
+                this.Title = "MIG_LevelEditor_s6053935 : '" + levelname + "'";
+            }
         }
-
     }
 
 

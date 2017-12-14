@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset>
   <sprites>
+    <sprite doc="Cave/Cave_00.png"/>
     <sprite doc="Cave/Cave_01.png"/>
 	<sprite doc="Cave/Cave_02.png"/>
 	<sprite doc="Cave/Cave_03.png"/>

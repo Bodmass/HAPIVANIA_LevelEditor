@@ -35,6 +35,7 @@ namespace MIG_LevelEditor_s6053935
         List<ImageBrush> edtiorTiles = new List<ImageBrush>();
         List<string> locations = new List<string>();
         ImageBrush SelectedTile;
+        string SelectedTileName;
         
         string currentAssemblyParentPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
@@ -58,7 +59,8 @@ namespace MIG_LevelEditor_s6053935
 
         private void Setup()
         {
-            SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_01.png", currentAssemblyParentPath))));
+            SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_00.png", currentAssemblyParentPath))));
+            SelectedTileName = "Cave/Cave_00.png";
         }
 
         private void Deselect_All()
@@ -147,6 +149,7 @@ namespace MIG_LevelEditor_s6053935
                 {
                     tileList[tileRects.IndexOf(rects)].SelectTile2();
                     SelectedTile = tileList[tileRects.IndexOf(rects)].CopyTile();
+                    SelectedTileName = tileList[tileRects.IndexOf(rects)].getImageName();
                 }
                 else
                 {
@@ -170,7 +173,7 @@ namespace MIG_LevelEditor_s6053935
 
                 if (rect1.IntersectsWith(rects))
                 {
-                    tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile);
+                    tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile, SelectedTileName);
                 }
             }
 
@@ -261,6 +264,7 @@ namespace MIG_LevelEditor_s6053935
                 {
                     tileList2[tileRects2.IndexOf(rects3)].SelectTile2();
                     SelectedTile = tileList2[tileRects2.IndexOf(rects3)].CopyTile();
+                    SelectedTileName = tileList2[tileRects2.IndexOf(rects3)].getImageName();
                 }
                 else
                 {
@@ -340,7 +344,8 @@ namespace MIG_LevelEditor_s6053935
                 {
                     ImageBrush EditorListBrush;
                     EditorListBrush = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + locations[i], currentAssemblyParentPath))));
-                    tileList2[i].SelectTile(EditorListBrush);
+                    string LocationString = locations[i];
+                    tileList2[i].SelectTile(EditorListBrush, LocationString);
                 }
                 
             }
@@ -423,8 +428,12 @@ namespace MIG_LevelEditor_s6053935
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
             doc.AppendChild(docNode);
 
+
+            XmlNode levelNode = doc.CreateElement("level");
+            doc.AppendChild(levelNode);
+
             XmlNode spritesNode = doc.CreateElement("sprites");
-            doc.AppendChild(spritesNode);
+            levelNode.AppendChild(spritesNode);
 
             for (int i = 0; i < locations.Count(); i++)
             {
@@ -434,6 +443,43 @@ namespace MIG_LevelEditor_s6053935
                 spriteNode.Attributes.Append(spriteAttribute);
                 spritesNode.AppendChild(spriteNode);
             }
+
+            XmlNode tilesNode = doc.CreateElement("tiles");
+            levelNode.AppendChild(spritesNode);
+
+            for (int i = 0; i < tileList.Count(); i++)
+            {
+                bool hastile = false;
+
+                Trace.WriteLine(tileList[i].getImageName());
+
+                if (tileList[i].getImageName() != tileList2[0].getImageName())
+                {
+                    hastile = true;
+                }
+
+
+                if (hastile)
+                {
+                    XmlNode tileNode = doc.CreateElement("tile");
+                    XmlAttribute tileAttribute = doc.CreateAttribute("x");
+                    tileAttribute.Value = tileList[i].getX().ToString();
+                    tileNode.Attributes.Append(tileAttribute);
+
+                    XmlAttribute tileAttribute2 = doc.CreateAttribute("y");
+                    tileAttribute2.Value = tileList[i].getY().ToString();
+                    tileNode.Attributes.Append(tileAttribute2);
+
+                    XmlAttribute tileAttribute3 = doc.CreateAttribute("look");
+                    tileAttribute3.Value = tileList[i].getImageName();
+                    tileNode.Attributes.Append(tileAttribute3);
+
+                    tilesNode.AppendChild(tileNode);
+                }
+            }
+
+            levelNode.AppendChild(tilesNode);
+
 
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.Title = "Save Level";

@@ -367,12 +367,12 @@ namespace MIG_LevelEditor_s6053935
                 {
 
                     tileList.Add(new Tile(canvasman, (row * width + col).ToString(), top, left));
-                    
-                    left += (size + 1);
+
+                    left += (size);// + 1);
                 }
 
                 left = 0;
-                top += (size + 1);
+                top += (size);// + 1);
                 tiles++;
             }
 

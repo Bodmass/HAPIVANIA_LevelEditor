@@ -421,6 +421,83 @@ namespace MIG_LevelEditor_s6053935
             }
         }
 
+        private void LoadLevel(object sender, RoutedEventArgs e)
+        {
+            Deselect_All();
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            dlg.DefaultExt = ".xml";
+            dlg.Title = "Load Level";
+            //dlg.Filter = "All Files (Images)|*.png;*.jpg;*.jpeg|JPEG Files (*.jpeg, *jpg)|*.jpeg;*.jpg|PNG Files (*.png)|*.png";
+            dlg.Filter = "Level (XML)|*.xml";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                locations.Clear();
+                string filename = dlg.FileName;
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filename);
+
+
+                List<int> tilex = new List<int>();
+                List<int> tiley = new List<int>();
+                List<string> tilel = new List<string>();
+                int index = 0;
+
+                foreach (XmlAttribute xa in doc.SelectNodes("level//tiles//tile/@x"))
+                {
+                    
+                    int location = int.Parse(xa.Value);
+                    tilex.Add(location/32);
+                    index++;
+                }
+
+                foreach (XmlAttribute xa in doc.SelectNodes("level//tiles//tile/@y"))
+                {
+                    int location = (int.Parse(xa.Value) / 32);
+                    tiley.Add(location);
+                }
+
+                foreach (XmlAttribute xa in doc.SelectNodes("level//tiles//tile/@look"))
+                {
+                    string location = xa.Value.ToString();
+                    tilel.Add(location);
+                }
+
+                for(int i = 0; i < index; i++)
+                {
+                    Trace.WriteLine("Tile at " + tilex[i] + ", " + tiley[i] + " Looks Like: " + tilel[i]);
+                }
+
+                foreach (Tile t in tileList)
+                {
+                    for (int i = 0; i < index; i++)
+                    {
+                        if((t.getX()/32) == tilex[i] && (t.getY()/32) == tiley[i])
+                        {
+                            SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + tilel[i], currentAssemblyParentPath))));
+                            SelectedTileName = tilel[i];
+                            t.SelectTile(SelectedTile, SelectedTileName);
+                            
+                        }
+                    }
+                }
+
+                for (int i = 0; i < locations.Count; i++)
+                {
+                    ImageBrush EditorListBrush;
+                    EditorListBrush = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + locations[i], currentAssemblyParentPath))));
+                    string LocationString = locations[i];
+                    tileList2[i].SelectTile(EditorListBrush, LocationString);
+                }
+
+            }
+        }
 
         private void SaveLevel(object sender, RoutedEventArgs e)
         {

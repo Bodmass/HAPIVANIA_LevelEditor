@@ -64,7 +64,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="LoadBTN" Content="Load" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="354.216,35.46,0,0" Grid.Column="1">
+            <Button x:Name="LoadBTN" Click="LoadLevel" Content="Load" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="354.216,35.46,0,0" Grid.Column="1">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>

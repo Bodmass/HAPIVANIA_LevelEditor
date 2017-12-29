@@ -21,7 +21,12 @@
 	<sprite doc="Cave/Cave_18.png"/>
 	<sprite doc="Cave/Cave_20.png"/>
 	<sprite doc="Cave/Cave_21.png"/>
+	<sprite doc="Cave/Cave_23.png"/>
+	<sprite doc="Cave/Cave_24.png"/>
+	<sprite doc="Cave/Cave_25.png"/>
+	<sprite doc="Cave/Cave_26.png"/>
+	<sprite doc="Cave/Cave_27.png"/>
+	<sprite doc="Cave/Cave_28.png"/>
+	
   </sprites>
-  <tiles column="7" row="15">
-  </tiles>
 </tileset>

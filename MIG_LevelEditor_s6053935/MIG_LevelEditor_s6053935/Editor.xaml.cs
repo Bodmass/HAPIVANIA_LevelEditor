@@ -54,7 +54,6 @@ namespace MIG_LevelEditor_s6053935
         bool mouseDown = false; // Set to 'true' when mouse is held down.
         Point mouseDownPos; // The point where the mouse button was clicked down.
 
-        bool mouseDown_Left = false; // Set to 'true' when mouse is held down.
         Point mouseDownPos_Left; // The point where the mouse button was clicked down.
 
         private void Setup()
@@ -65,6 +64,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void Deselect_All()
         {
+            //Set off screen
             Canvas.SetLeft(selectionBox, 9999);
             Canvas.SetTop(selectionBox, 9999);
             selectionBox.Width = 0;
@@ -195,8 +195,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void Grid_MouseDown_Left(object sender, MouseButtonEventArgs a)
         {
-            // Capture and track the mouse.
-            mouseDown_Left = true;
+            //Check when the Tiles on the Left have been clicked
             mouseDownPos_Left = a.GetPosition(TheOtherGrid);
             TheOtherGrid.CaptureMouse();
 
@@ -224,8 +223,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void Grid_MouseUp_Left(object sender, MouseButtonEventArgs a)
         {
-            // Release the mouse capture and stop tracking it.
-            mouseDown_Left = false;
+            // Release the mouse capture
             TheOtherGrid.ReleaseMouseCapture();
 
             // Hide the drag selection box.
@@ -292,11 +290,11 @@ namespace MIG_LevelEditor_s6053935
 
                     tileList.Add(new Tile(canvasman, (row * width + col).ToString(), top, left));
 
-                    left += (size);// + 1);
+                    left += (size);
                 }
 
                 left = 0;
-                top += (size);// + 1);
+                top += (size);
                 tiles++;
             }
 

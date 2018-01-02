@@ -15,9 +15,7 @@ namespace MIG_LevelEditor_s6053935
 {
     class Tile
     {
-        int index = 0;
         int tilesize = 32;
-        bool isSelected = false;
         Brush tilecolour = Brushes.Black;
         Rectangle TileRect;
         string currentAssemblyParentPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
@@ -68,7 +66,6 @@ namespace MIG_LevelEditor_s6053935
 
         public void SelectTile(ImageBrush img, string str)
         {
-            isSelected = true;
             TileRect.Fill = img;
             tileImage = img;
             tileImageName = str;
@@ -78,14 +75,12 @@ namespace MIG_LevelEditor_s6053935
 
         public void SelectTile2()
         {
-            isSelected = true;
             Selectangle.Visibility = Visibility.Visible;
 
         }
 
         public void DeselectTile()
         {
-            isSelected = false;
             Selectangle.Visibility = Visibility.Collapsed;
 
         }

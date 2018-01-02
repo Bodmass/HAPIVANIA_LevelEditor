@@ -37,7 +37,15 @@
                     <GradientStop Color="#FF3C3C3C" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <ScrollViewer x:Name="EditorScroll" Height="403" VerticalAlignment="Top" Width="248.5" HorizontalAlignment="Left" CanContentScroll="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Background="Black">
+            <ScrollViewer x:Name="EditorScroll" Height="438" VerticalAlignment="Top" Width="248.5" HorizontalAlignment="Left" CanContentScroll="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Background="Black" RenderTransformOrigin="0.5,0.5" Margin="0.043,0,-0.043,-35">
+                <ScrollViewer.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0.141"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0.498"/>
+                    </TransformGroup>
+                </ScrollViewer.RenderTransform>
                 <Grid x:Name="TheOtherGrid"         
                     MouseDown="Grid_MouseDown_Left"
                     MouseUp="Grid_MouseUp_Left"
@@ -49,7 +57,6 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="248.5" Margin="9,612,0,0" Background="White"/>
         <Image Margin="0,0,648.492,516.998" Source="Logo.png" Stretch="Fill"/>
         <Grid HorizontalAlignment="Left" Height="143.33" VerticalAlignment="Top" Width="633.662" Margin="628.508,10,0,0">
             <Grid.ColumnDefinitions>
@@ -88,22 +95,11 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="SaveAsBTN" Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114.454" Height="30.46" FontSize="16" Foreground="White" FontFamily="Trebuchet MS" Margin="354.216,106.38,0,0" Grid.Column="1">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0"/>
-                        <GradientStop Color="#FF1B1B1B" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <TextBlock x:Name="TilesetName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,35.46,0,0" Grid.ColumnSpan="2" Height="23.293" Width="453.7" Foreground="White"><Run Text="Tileset: "/><Run Text="[Nothing Loaded]"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="TilesetName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,35.46,0,0" Grid.ColumnSpan="2" Height="51.236" Width="453.7" Foreground="White"><Run Text="Tileset: "/><Run Text="[Nothing Loaded]"/><LineBreak/><Run/></TextBlock>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="40.67" VerticalAlignment="Top" Width="248.5" Margin="9,157.663,0,0">
-            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248.5" Height="40.67" Background="#FF252525" Foreground="#FF191919" BorderBrush="{x:Null}" FontSize="22" SelectedIndex="0" FontWeight="Bold">
-                <ComboBoxItem Content="Tiles" Selected="Tiles_Click" HorizontalAlignment="Left" Width="238.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold"/>
-                <ComboBoxItem Content="Objects" HorizontalAlignment="Left" Width="118" IsEnabled="False" FontWeight="Bold"/>
-                <ComboBoxItem Content="Enemies" HorizontalAlignment="Left" Width="246.5" IsEnabled="False" FontWeight="Bold"/>
-                <ComboBoxItem Content="Settings" Selected="Settings_Click" HorizontalAlignment="Left" Width="246.5" FontWeight="Bold"/>
+            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248.5" Height="30.67" Background="#FF252525" Foreground="#FF191919" BorderBrush="{x:Null}" FontSize="20" SelectedIndex="0" Margin="0,10,0,0" FontWeight="Bold">
+                <ComboBoxItem Content="Tiles" HorizontalAlignment="Left" Width="238.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold"/>
             </ComboBox>
         </Grid>
         <Grid x:Name="Grid_Settings" HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="248.5" Margin="9,204,0,0" Visibility="Collapsed">
@@ -123,10 +119,7 @@
                 <ColumnDefinition Width="11*"/>
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="comboBox_Copy" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134.5" Height="30.67" Background="#FF252525" Foreground="#FF191919" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,10,0,0" SelectedIndex="0">
-                <ComboBoxItem Content="Game Layer" Selected="Tiles_Click" HorizontalAlignment="Left" Width="124.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold" FontSize="18"/>
-                <ComboBoxItem Content="Background" Selected="Tiles_Click" HorizontalAlignment="Left" Width="124.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold" FontSize="18" IsEnabled="False"/>
-                <ComboBoxItem Content="Collision" Selected="Tiles_Click" HorizontalAlignment="Left" Width="124.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold" FontSize="18" IsEnabled="False"/>
-                <ComboBoxItem Content="Foreground" Selected="Tiles_Click" HorizontalAlignment="Left" Width="124.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold" FontSize="18" IsEnabled="False"/>
+                <ComboBoxItem Content="Game Layer"  HorizontalAlignment="Left" Width="124.5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontWeight="Bold" FontSize="18"/>
             </ComboBox>
         </Grid>
     </Grid>

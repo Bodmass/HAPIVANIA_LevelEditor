@@ -85,7 +85,7 @@ namespace MIG_LevelEditor_s6053935
         {
             Deselect_All();
 
-            // Capture and track the mouse.
+            // Track the mouse.
             mouseDown = true;
             mouseDownPos = e.GetPosition(theGrid);
             theGrid.CaptureMouse();
@@ -96,29 +96,8 @@ namespace MIG_LevelEditor_s6053935
             selectionBox.Width = 0;
             selectionBox.Height = 0;
 
-            // Make the drag selection box visible.
+            // Make the selection box visible.
             selectionBox.Visibility = Visibility.Visible;
-
-            /*
-
-            Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
-
-            
-
-            foreach (Rect rects in tileRects)
-            {
-
-                if (rect1.IntersectsWith(rects))
-                {
-                    tileList[tileRects.IndexOf(rects)].SelectTile2();
-                }
-                else
-                {
-                    tileList[tileRects.IndexOf(rects)].DeselectTile();
-                }
-            }
-
-            */
 
         }
 
@@ -128,19 +107,13 @@ namespace MIG_LevelEditor_s6053935
             mouseDown = true;
             mouseDownPos = e.GetPosition(theGrid);
             theGrid.CaptureMouse();
-
-            // Initial placement of the drag selection box.         
+      
             Canvas.SetLeft(selectionBox, mouseDownPos.X);
             Canvas.SetTop(selectionBox, mouseDownPos.Y);
             selectionBox.Width = 0;
             selectionBox.Height = 0;
 
-            // Make the drag selection box visible.
-            //selectionBox.Visibility = Visibility.Visible;
-
             Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
-
-
 
             foreach (Rect rects in tileRects)
             {
@@ -186,40 +159,12 @@ namespace MIG_LevelEditor_s6053935
 
             Point mouseUpPos = e.GetPosition(theGrid);
 
-            // TODO: 
-            //
-            // The mouse has been released, check to see if any of the items 
-            // in the other canvas are contained within mouseDownPos and 
-            // mouseUpPos, for any that are, select them!
-            //
         }
 
         private void Grid_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown)
             {
-                /*
-
-                Rect rect1 = new Rect(Canvas.GetLeft(selectionBox), Canvas.GetTop(selectionBox), selectionBox.Width, selectionBox.Height);
-
-                
-
-                foreach (Rect rects in tileRects)
-                {
-
-                    if (rect1.IntersectsWith(rects))
-                    {
-                        tileList[tileRects.IndexOf(rects)].SelectTile2();
-                    }
-                    else
-                    {
-                        tileList[tileRects.IndexOf(rects)].DeselectTile();
-                    }
-                }
-
-                */
-
-                // When the mouse is held down, reposition the drag selection box.
 
                 Point mousePos = e.GetPosition(theGrid);
 
@@ -288,27 +233,6 @@ namespace MIG_LevelEditor_s6053935
 
             Point mouseUpPos_Left = a.GetPosition(TheOtherGrid);
         }
-
-
-        private void HideDropdownGrid()
-        {
-            //Grid_Settings.Visibility = System.Windows.Visibility.Hidden;
-            //Grid_Tiles.Visibility = System.Windows.Visibility.Hidden;
-        }
-
-        private void Tiles_Click(object sender, RoutedEventArgs e)
-        {
-            //HideDropdownGrid();
-            //Grid_Tiles.Visibility = System.Windows.Visibility.Visible;
-        }
-
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            //HideDropdownGrid();
-            //Grid_Settings.Visibility = System.Windows.Visibility.Visible;
-        }
-
 
         private void btnImportTileset_Click(object sender, RoutedEventArgs e)
         {
@@ -428,16 +352,14 @@ namespace MIG_LevelEditor_s6053935
 
             dlg.DefaultExt = ".xml";
             dlg.Title = "Load Level";
-            //dlg.Filter = "All Files (Images)|*.png;*.jpg;*.jpeg|JPEG Files (*.jpeg, *jpg)|*.jpeg;*.jpg|PNG Files (*.png)|*.png";
             dlg.Filter = "Level (XML)|*.xml";
 
 
-            // Display OpenFileDialog by calling ShowDialog method 
+
             Nullable<bool> result = dlg.ShowDialog();
 
             if (result == true)
             {
-                locations.Clear();
                 string filename = dlg.FileName;
 
                 XmlDocument doc = new XmlDocument();
@@ -469,9 +391,32 @@ namespace MIG_LevelEditor_s6053935
                     tilel.Add(location);
                 }
 
-                for(int i = 0; i < index; i++)
+                foreach (XmlAttribute xb in doc.SelectNodes("level//sprites//sprite/@location"))
                 {
-                    Trace.WriteLine("Tile at " + tilex[i] + ", " + tiley[i] + " Looks Like: " + tilel[i]);
+                    bool notadded = true;
+                    string location = xb.Value.ToString();
+                    foreach (string s in locations)
+                    {
+                        if (s == location)
+                        {
+                            notadded = false;
+                            break;
+                        }
+                    }
+
+                    if (notadded)
+                    {
+                        Trace.WriteLine(location);
+                        locations.Add(location);
+                    }
+                }
+
+                for (int i = 0; i < locations.Count; i++)
+                {
+                    ImageBrush EditorListBrush;
+                    EditorListBrush = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + locations[i], currentAssemblyParentPath))));
+                    string LocationString = locations[i];
+                    tileList2[i].SelectTile(EditorListBrush, LocationString);
                 }
 
                 foreach (Tile t in tileList)
@@ -486,14 +431,6 @@ namespace MIG_LevelEditor_s6053935
                             
                         }
                     }
-                }
-
-                for (int i = 0; i < locations.Count; i++)
-                {
-                    ImageBrush EditorListBrush;
-                    EditorListBrush = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + locations[i], currentAssemblyParentPath))));
-                    string LocationString = locations[i];
-                    tileList2[i].SelectTile(EditorListBrush, LocationString);
                 }
 
             }

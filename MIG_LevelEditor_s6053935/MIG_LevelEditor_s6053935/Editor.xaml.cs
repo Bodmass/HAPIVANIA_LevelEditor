@@ -343,6 +343,28 @@ namespace MIG_LevelEditor_s6053935
             }
         }
 
+        private void NewLevel(object sender, RoutedEventArgs e)
+        {
+            SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_00.png", currentAssemblyParentPath))));
+            SelectedTileName = "Cave/Cave_00.png";
+
+            foreach (Rect rects in tileRects)
+            {
+                tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile, SelectedTileName);
+                tileList[tileRects.IndexOf(rects)].DeselectTile();
+            }
+
+            foreach (Rect rects in tileRects2)
+            {
+                tileList2[tileRects2.IndexOf(rects)].SelectTile(SelectedTile, SelectedTileName);
+                tileList2[tileRects2.IndexOf(rects)].DeselectTile();
+            }
+
+            locations.Clear();
+            TilesetName.Text = "Tileset: [Nothing Loaded]";
+
+        }
+
         private void LoadLevel(object sender, RoutedEventArgs e)
         {
             Deselect_All();
@@ -417,6 +439,21 @@ namespace MIG_LevelEditor_s6053935
                     tileList2[i].SelectTile(EditorListBrush, LocationString);
                 }
 
+
+                ImageBrush RememberTile = SelectedTile;
+                String RememberTileName = SelectedTileName;
+
+
+                SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_00.png", currentAssemblyParentPath))));
+                SelectedTileName = "Cave/Cave_00.png";
+
+                foreach (Rect rects in tileRects)
+                {
+                    tileList[tileRects.IndexOf(rects)].SelectTile(SelectedTile, SelectedTileName);
+                    tileList[tileRects.IndexOf(rects)].DeselectTile();
+                }
+
+                
                 foreach (Tile t in tileList)
                 {
                     for (int i = 0; i < index; i++)
@@ -430,6 +467,9 @@ namespace MIG_LevelEditor_s6053935
                         }
                     }
                 }
+
+                SelectedTile = RememberTile;
+                SelectedTileName = RememberTileName;
 
             }
         }

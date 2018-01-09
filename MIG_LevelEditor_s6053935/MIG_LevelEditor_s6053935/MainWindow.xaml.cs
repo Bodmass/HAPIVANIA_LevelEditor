@@ -26,6 +26,7 @@ namespace MIG_LevelEditor_s6053935
         public MainWindow()
         {
             InitializeComponent();
+            //Convert texbox into int for editor width/height
             int.TryParse((string)SetWidth.Text, out width);
             int.TryParse((string)SetHeight.Text, out height);
             OverallSize.Text = "Level Size: " + (width * 32).ToString() + " x " + (height * 32).ToString();
@@ -47,6 +48,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
+            //Create an instance of the editor window.
             Editor win = new Editor();
             win.Show();
             this.Close();
@@ -54,6 +56,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
+            //Used to only allow numbers in the text box
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
@@ -72,6 +75,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void UpdateText()
         {
+            //Display the Size of the Level
             if (OverallSize != null)
             {
                 OverallSize.Text = "Level Size: " + (width * 32).ToString() + " x " + (height * 32).ToString();
@@ -80,6 +84,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void Quit_Click(object sender, RoutedEventArgs e)
         {
+            //Exit the application
             System.Windows.Application.Current.Shutdown();
         }
     }

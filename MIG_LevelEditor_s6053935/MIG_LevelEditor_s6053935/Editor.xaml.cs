@@ -54,17 +54,18 @@ namespace MIG_LevelEditor_s6053935
         bool mouseDown = false; // Set to 'true' when mouse is held down.
         Point mouseDownPos; // The point where the mouse button was clicked down.
 
-        Point mouseDownPos_Left; // The point where the mouse button was clicked down.
+        Point mouseDownPos_Left;
 
         private void Setup()
         {
+            //Default/Empty Tile
             SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_00.png", currentAssemblyParentPath))));
             SelectedTileName = "Cave/Cave_00.png";
         }
 
         private void Deselect_All()
         {
-            //Set off screen
+            //Deselects all Tiles and pushes the selection box away
             Canvas.SetLeft(selectionBox, 9999);
             Canvas.SetTop(selectionBox, 9999);
             selectionBox.Width = 0;
@@ -103,7 +104,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void Grid_CopyTile(object sender, MouseButtonEventArgs e)
         {
-            // Capture and track the mouse.
+            // Right Click and Copy the currently selected Tile to be the brush instead
             mouseDown = true;
             mouseDownPos = e.GetPosition(theGrid);
             theGrid.CaptureMouse();
@@ -234,13 +235,13 @@ namespace MIG_LevelEditor_s6053935
 
         private void btnImportTileset_Click(object sender, RoutedEventArgs e)
         {
+            //Import a Tileset into the Editor
             Deselect_All();
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
-            dlg.DefaultExt = ".png";
+            dlg.DefaultExt = ".xml";
             dlg.Title = "Load Tileset";
-            //dlg.Filter = "All Files (Images)|*.png;*.jpg;*.jpeg|JPEG Files (*.jpeg, *jpg)|*.jpeg;*.jpg|PNG Files (*.png)|*.png";
-            dlg.Filter = "Tileset (XML)|*.xml";
+            dlg.Filter = "Tileset (XML)|*.xml"; //Force only XML
 
 
             // Display OpenFileDialog by calling ShowDialog method 
@@ -278,7 +279,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void DisplayGrid()
         {
-
+            //Create the tile grid based on the width and height passed through by the Main Window
             int size = 32;
             int top = 0;
             int left = 0;
@@ -345,6 +346,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void NewLevel(object sender, RoutedEventArgs e)
         {
+            //Clear out all the tiles and currently stored data.
             SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_00.png", currentAssemblyParentPath))));
             SelectedTileName = "Cave/Cave_00.png";
 
@@ -367,6 +369,7 @@ namespace MIG_LevelEditor_s6053935
 
         private void LoadLevel(object sender, RoutedEventArgs e)
         {
+            //Load a saved level
             Deselect_All();
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
@@ -411,6 +414,7 @@ namespace MIG_LevelEditor_s6053935
                     tilel.Add(location);
                 }
 
+                //If current tiles dont exist, add them, else break.
                 foreach (XmlAttribute xb in doc.SelectNodes("level//sprites//sprite/@location"))
                 {
                     bool notadded = true;
@@ -443,7 +447,7 @@ namespace MIG_LevelEditor_s6053935
                 ImageBrush RememberTile = SelectedTile;
                 String RememberTileName = SelectedTileName;
 
-
+                //Clear all the old Tiles
                 SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_00.png", currentAssemblyParentPath))));
                 SelectedTileName = "Cave/Cave_00.png";
 
@@ -453,7 +457,7 @@ namespace MIG_LevelEditor_s6053935
                     tileList[tileRects.IndexOf(rects)].DeselectTile();
                 }
 
-                
+                //Replace with loaded tiles
                 foreach (Tile t in tileList)
                 {
                     for (int i = 0; i < index; i++)

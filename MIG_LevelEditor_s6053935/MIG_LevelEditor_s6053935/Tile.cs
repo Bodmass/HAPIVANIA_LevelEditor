@@ -15,6 +15,11 @@ namespace MIG_LevelEditor_s6053935
 {
     class Tile
     {
+        /*
+         * Create an instance of this for each tile that exists in the level
+         * Set the size to 32x32 and give it the default black brush which is empty.
+         * Set the brush image to whatever is being passed through selected
+         */
         int tilesize = 32;
         Brush tilecolour = Brushes.Black;
         Rectangle TileRect;
@@ -37,6 +42,7 @@ namespace MIG_LevelEditor_s6053935
             TileRect.Width = tilesize; TileRect.Height = tilesize;
             TileRect.Fill = tilecolour;
             TileRect.Stroke = Brushes.DarkSlateGray;
+            //Text Display, remove // to enable
             // TextBlock text = new TextBlock();
             // text.Width = tilesize; text.Height = tilesize;
             //text.Foreground = Brushes.GhostWhite;

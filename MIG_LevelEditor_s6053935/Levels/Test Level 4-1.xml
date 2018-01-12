@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<level>
+  <sprites>
+    <sprite location="Cave/Cave_00.png" />
+    <sprite location="Cave/Cave_01.png" />
+    <sprite location="Cave/Cave_02.png" />
+    <sprite location="Cave/Cave_03.png" />
+    <sprite location="Cave/Cave_04.png" />
+    <sprite location="Cave/Cave_05.png" />
+    <sprite location="Cave/Cave_07.png" />
+    <sprite location="Cave/Cave_08.png" />
+    <sprite location="Cave/Cave_09.png" />
+    <sprite location="Cave/Cave_10.png" />
+    <sprite location="Cave/Cave_11.png" />
+    <sprite location="Cave/Cave_12.png" />
+    <sprite location="Cave/Cave_13.png" />
+    <sprite location="Cave/Cave_14.png" />
+    <sprite location="Cave/Cave_15.png" />
+    <sprite location="Cave/Cave_16.png" />
+    <sprite location="Cave/Cave_17.png" />
+    <sprite location="Cave/Cave_18.png" />
+    <sprite location="Cave/Cave_20.png" />
+    <sprite location="Cave/Cave_21.png" />
+    <sprite location="Cave/Cave_23.png" />
+    <sprite location="Cave/Cave_24.png" />
+    <sprite location="Cave/Cave_25.png" />
+    <sprite location="Cave/Cave_26.png" />
+    <sprite location="Cave/Cave_27.png" />
+    <sprite location="Cave/Cave_28.png" />
+  </sprites>
+  <tiles>
+    <tile x="32" y="64" look="Cave/Cave_01.png" />
+    <tile x="64" y="64" look="Cave/Cave_03.png" />
+    <tile x="96" y="64" look="Cave/Cave_03.png" />
+    <tile x="128" y="64" look="Cave/Cave_03.png" />
+    <tile x="160" y="64" look="Cave/Cave_03.png" />
+    <tile x="192" y="64" look="Cave/Cave_05.png" />
+    <tile x="32" y="96" look="Cave/Cave_12.png" />
+    <tile x="64" y="96" look="Cave/Cave_14.png" />
+    <tile x="96" y="96" look="Cave/Cave_14.png" />
+    <tile x="128" y="96" look="Cave/Cave_14.png" />
+    <tile x="160" y="96" look="Cave/Cave_14.png" />
+    <tile x="192" y="96" look="Cave/Cave_16.png" />
+    <tile x="320" y="160" look="Cave/Cave_01.png" />
+    <tile x="352" y="160" look="Cave/Cave_03.png" />
+    <tile x="384" y="160" look="Cave/Cave_05.png" />
+    <tile x="96" y="192" look="Cave/Cave_01.png" />
+    <tile x="128" y="192" look="Cave/Cave_03.png" />
+    <tile x="160" y="192" look="Cave/Cave_03.png" />
+    <tile x="192" y="192" look="Cave/Cave_03.png" />
+    <tile x="224" y="192" look="Cave/Cave_05.png" />
+    <tile x="320" y="192" look="Cave/Cave_07.png" />
+    <tile x="352" y="192" look="Cave/Cave_09.png" />
+    <tile x="384" y="192" look="Cave/Cave_11.png" />
+    <tile x="96" y="224" look="Cave/Cave_12.png" />
+    <tile x="128" y="224" look="Cave/Cave_14.png" />
+    <tile x="160" y="224" look="Cave/Cave_14.png" />
+    <tile x="192" y="224" look="Cave/Cave_14.png" />
+    <tile x="224" y="224" look="Cave/Cave_16.png" />
+    <tile x="320" y="224" look="Cave/Cave_07.png" />
+    <tile x="352" y="224" look="Cave/Cave_09.png" />
+    <tile x="384" y="224" look="Cave/Cave_11.png" />
+    <tile x="320" y="256" look="Cave/Cave_07.png" />
+    <tile x="352" y="256" look="Cave/Cave_09.png" />
+    <tile x="384" y="256" look="Cave/Cave_11.png" />
+    <tile x="320" y="288" look="Cave/Cave_07.png" />
+    <tile x="352" y="288" look="Cave/Cave_09.png" />
+    <tile x="384" y="288" look="Cave/Cave_11.png" />
+    <tile x="320" y="320" look="Cave/Cave_12.png" />
+    <tile x="352" y="320" look="Cave/Cave_14.png" />
+    <tile x="384" y="320" look="Cave/Cave_16.png" />
+  </tiles>
+</level>

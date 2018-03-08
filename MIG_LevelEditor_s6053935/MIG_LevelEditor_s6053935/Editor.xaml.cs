@@ -488,6 +488,12 @@ namespace MIG_LevelEditor_s6053935
             XmlNode levelNode = doc.CreateElement("level");
             doc.AppendChild(levelNode);
 
+            XmlNode infoNode = doc.CreateElement("info");
+            XmlAttribute heightAttribute = doc.CreateAttribute("height");
+            heightAttribute.Value = (height * 32).ToString();
+            infoNode.Attributes.Append(heightAttribute);
+            levelNode.AppendChild(infoNode);
+
             XmlNode spritesNode = doc.CreateElement("sprites");
             levelNode.AppendChild(spritesNode);
 

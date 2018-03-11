@@ -492,6 +492,11 @@ namespace MIG_LevelEditor_s6053935
             XmlAttribute heightAttribute = doc.CreateAttribute("height");
             heightAttribute.Value = (height * 32).ToString();
             infoNode.Attributes.Append(heightAttribute);
+
+            XmlAttribute widthAttribute = doc.CreateAttribute("width");
+            widthAttribute.Value = (width * 32).ToString();
+            infoNode.Attributes.Append(widthAttribute);
+
             levelNode.AppendChild(infoNode);
 
             XmlNode spritesNode = doc.CreateElement("sprites");
@@ -555,7 +560,7 @@ namespace MIG_LevelEditor_s6053935
             {
                 string levelname = dlg.FileName;
                 doc.Save(levelname);
-                this.Title = "MIG_LevelEditor_s6053935 : '" + levelname + "'";
+                this.Title = "AzEditor: '" + levelname + "'";
             }
         }
     }

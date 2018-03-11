@@ -279,6 +279,11 @@ namespace MIG_LevelEditor_s6053935
 
         private void DisplayGrid()
         {
+            tileList.Clear();
+            tileRects.Clear();
+            canvasman.Children.Clear();
+            tiles = 0;
+
             //Create the tile grid based on the width and height passed through by the Main Window
             int size = 32;
             int top = 0;
@@ -394,6 +399,31 @@ namespace MIG_LevelEditor_s6053935
                 List<string> tilel = new List<string>();
                 int index = 0;
 
+                int newheight = 0;
+                int newwidth = 0;
+
+                foreach(XmlAttribute xa in doc.SelectNodes("level//info/@height"))
+                {
+                    newheight = int.Parse(xa.Value) /32;
+                }
+
+                foreach (XmlAttribute xa in doc.SelectNodes("level//info/@width"))
+                {
+                    newwidth = int.Parse(xa.Value) / 32;
+                }
+
+                if (height < newheight)
+                {
+                    height = newheight;
+                }
+
+                if (width < newwidth)
+                {
+                    width = newwidth;
+                }
+
+
+
                 foreach (XmlAttribute xa in doc.SelectNodes("level//tiles//tile/@x"))
                 {
                     
@@ -446,6 +476,9 @@ namespace MIG_LevelEditor_s6053935
 
                 ImageBrush RememberTile = SelectedTile;
                 String RememberTileName = SelectedTileName;
+
+                
+                DisplayGrid();
 
                 //Clear all the old Tiles
                 SelectedTile = new ImageBrush(new BitmapImage(new Uri(String.Format("file:///{0}/" + "Cave/Cave_00.png", currentAssemblyParentPath))));

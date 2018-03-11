@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MIG_LevelEditor_s6053935"
         mc:Ignorable="d"
-        Title="AzEditor (MIG ICA s6053935)" Height="450" Width="900" HorizontalAlignment="Center" HorizontalContentAlignment="Center" IsTabStop="False" WindowStartupLocation="CenterScreen" Grid.IsSharedSizeScope="True" MinHeight="450" MinWidth="900" MaxWidth="900" MaxHeight="450" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow" Visibility="Visible" Icon="Icon.png" ResizeMode="NoResize">
+        Title="AzEditor" Height="450" Width="900" HorizontalAlignment="Center" HorizontalContentAlignment="Center" IsTabStop="False" WindowStartupLocation="CenterScreen" Grid.IsSharedSizeScope="True" MinHeight="450" MinWidth="900" MaxWidth="900" MaxHeight="450" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow" Visibility="Visible" Icon="Icon.png" ResizeMode="NoResize">
     <Window.Resources>
         <Storyboard x:Key="Startup">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image">

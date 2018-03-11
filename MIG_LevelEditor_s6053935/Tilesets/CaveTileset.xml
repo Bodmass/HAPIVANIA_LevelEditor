@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset>
   <sprites>
-    <sprite doc="Cave/Cave_00.png"/>
+	<sprite doc="Cave/Cave_00.png"/>
+    <sprite doc="Misc/images/SpecialTiles_01.png"/>
+    <sprite doc="Misc/images/SpecialTiles_02.png"/>
+    <sprite doc="Misc/images/SpecialTiles_03.png"/>
+    <sprite doc="Misc/images/SpecialTiles_04.png"/>
+	<sprite doc="Misc/images/SpecialTiles_05.png"/>
+	<sprite doc="Misc/images/SpecialTiles_06.png"/>
+	<sprite doc="Misc/images/SpecialTiles_07.png"/>
     <sprite doc="Cave/Cave_01.png"/>
 	<sprite doc="Cave/Cave_02.png"/>
 	<sprite doc="Cave/Cave_03.png"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MIG_LevelEditor_s6053935"
         mc:Ignorable="d"
-        Title="MIG_LevelEditor_s6053935 : 'Untitled'" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="Icon.png" MinWidth="1280" MinHeight="720">
+        Title="AzEditor: 'Untitled'" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="Icon.png" MinWidth="1280" MinHeight="720">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="1"/>
@@ -13,7 +13,12 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Grid Margin="269.25,204,68.628,38.835">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="336*"/>
+            <ColumnDefinition Width="141*"/>
+            <ColumnDefinition Width="797*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="269.25,204,68.628,38.835" Grid.ColumnSpan="3">
             <ScrollViewer x:Name="MapScroll" Height="438.165" VerticalAlignment="Top" Width="926.122" HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Left" CanContentScroll="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Background="Black">
                 <Grid x:Name="theGrid"         MouseLeftButtonDown="Grid_MouseDown"
         MouseUp="Grid_MouseUp"
@@ -57,8 +62,8 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        <Image Margin="0,0,648.492,516.998" Source="Logo.png" Stretch="Fill"/>
-        <Grid HorizontalAlignment="Left" Height="143.33" VerticalAlignment="Top" Width="633.662" Margin="628.508,10,0,0">
+        <Image Margin="0,0,648.492,516.998" Source="Logo.png" Stretch="Fill" Grid.ColumnSpan="3"/>
+        <Grid HorizontalAlignment="Left" Height="143.33" VerticalAlignment="Top" Width="633.662" Margin="151.508,10,0,0" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="155*"/>
                 <ColumnDefinition Width="479*"/>
@@ -113,7 +118,7 @@
                 <MenuItem Header="MenuItem" Height="54" Width="248.5" Background="#FF303030" Foreground="White" BorderBrush="{x:Null}"/>
             </Menu>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="40.67" VerticalAlignment="Top" Width="135.258" Margin="268.25,158.33,0,0" Background="#FF232323">
+        <Grid HorizontalAlignment="Left" Height="40.67" VerticalAlignment="Top" Width="135.258" Margin="268.25,158.33,0,0" Background="#FF232323" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="11*"/>
